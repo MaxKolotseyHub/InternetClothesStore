@@ -1,0 +1,17 @@
+﻿.catalog-container-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-basis: 20%;
+}
+
+.catalog-container-grid{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 2vw;
+    align-content: space-around;
+    margin: 5%;
+    text-align:center;
+}

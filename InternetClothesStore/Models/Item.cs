@@ -10,7 +10,6 @@ namespace InternetClothesStore.Models
         public Item()
         {
             Images = new List<Image>();
-            Categories = new List<Category>();
             Purchases = new List<Purchase>();
         }
         public int Id { get; set; }
@@ -18,7 +17,8 @@ namespace InternetClothesStore.Models
         public string Description { get; set; }
         public long Quantity { get; set; }
         public virtual List<Image> Images { get; set; }
-        public virtual List<Category> Categories { get; set; }
+        public  int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
         public virtual List<Purchase> Purchases{ get; set; }
 
     }

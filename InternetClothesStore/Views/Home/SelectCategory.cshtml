@@ -1,0 +1,17 @@
+﻿@model List<InternetClothesStore.Models.Item>
+
+    <html>
+    <body>
+        <link href="~/Content/MyStyles.css" rel="stylesheet" />
+
+        <div class="catalog-container-grid">
+            @foreach (var item in Model)
+            {
+                <div class="card">
+                    <img src="@item.Images.First().Path " />
+                    <p>@item.Title</p>
+                </div>
+            }
+        </div>
+    </body>
+    </html>

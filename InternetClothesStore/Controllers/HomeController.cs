@@ -3,6 +3,7 @@ using InternetClothesStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,19 +13,23 @@ namespace InternetClothesStore.Controllers
     {
         public ActionResult Index()
         {
-            using (InternetStoreContext ctx = new InternetStoreContext())
+            List<Category> categories = new List<Category>();
+            using(InternetStoreContext db=new InternetStoreContext())
             {
-                var category = ctx.Categories.ToList().First();
-                var items = ctx.Items.FirstOrDefault(x => x.Categories.FirstOrDefault(y => y.Id == category.Id) !=null);
+                categories = db.Categories.ToList();
             }
-            return View();
+            return View(categories);
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult SelectCategory(string category)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            List<Item> items = new List<Item>();
+            using(InternetStoreContext db = new InternetStoreContext())
+            {
+                items = db.Items.Include(x=>x.Images).Include(x=>x.Category).Where(x => x.Category.Name == category).ToList();
+            }
+            return PartialView(items);
         }
 
         public ActionResult Contact()

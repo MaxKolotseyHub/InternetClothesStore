@@ -39,7 +39,7 @@ namespace InternetClothesStore.Db
 
             itemJacket1.Purchases.Add(purchase);
             itemJacket1.Images.Add(imageJacket1);
-            itemJacket1.Categories.Add(categoryJackets);
+            itemJacket1.Category = categoryJackets;
 
             context.Items.Add(itemJacket1);
             context.SaveChanges();

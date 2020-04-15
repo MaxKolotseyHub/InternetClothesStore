@@ -1,0 +1,19 @@
+﻿@model List<InternetClothesStore.Models.Item>
+
+<html>
+<body>
+    <link href="~/Content/MyStyles.css" rel="stylesheet" />
+
+    <div class="catalog-container-flex">
+        @foreach (var item in Model)
+        {
+            <div class="card card-hover" style="margin:25px; height:auto; width: auto; padding:5px; min-width:250px">
+                <img src="@item.Images.First().Path" height="250" />
+                <p><h3 class="lead text-center">@item.Title</h3></p>
+                <p class="text-center">Цена: @item.Price BYN</p>
+                @Html.ActionLink("Подробнее", "Index", "Home", new { @class = "text overlay" })
+            </div>
+        }
+    </div>
+</body>
+</html>

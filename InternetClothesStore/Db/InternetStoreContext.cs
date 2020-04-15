@@ -22,5 +22,6 @@ namespace InternetClothesStore.Db
         public DbSet<Image> Images { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<Size> Sizes { get; set; }
     }
 }

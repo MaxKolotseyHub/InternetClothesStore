@@ -11,8 +11,8 @@ namespace InternetClothesStore.Db
     {
         protected override void Seed(InternetStoreContext context)
         {
-            Category categoryJackets = new Category { Name = "Jackets" };
-            Category categoryPants = new Category { Name = "Pants" };
+            Category categoryJackets = new Category { Name = "Куртки" };
+            Category categoryPants = new Category { Name = "Брюки" };
 
             context.Categories.Add(categoryPants);
             context.Categories.Add(categoryPants);
@@ -35,13 +35,31 @@ namespace InternetClothesStore.Db
 
             context.Clients.Add(client1);
 
-            Item itemJacket1 = new Item {Title="Denim Pants", Description="Amazing denim pants from Bangluadesh", Quantity=25 };
+            Item itemJacket1 = new Item {ClothingType = ClothingType.Cloth ,Sex = Sex.Unisex, Title="Желтая куртка", Description="Очень классная куртка, такая классная, что всем советуем.", Quantity=25, Price= 47.92 };
+            Item itemJacket2 = new Item { ClothingType = ClothingType.Cloth, Sex = Sex.Female, Title="Хорошая куртка", Description="Куртка неплоха, можно поносить, рили", Quantity=19, Price= 35.92 };
+            Item itemPants1 = new Item { ClothingType = ClothingType.Cloth, Sex =Sex.Female, Title="Штанишки", Description="Шутки шутками,а без штанов не проживешь. Покупай хорошие штаны в нашем магазине!", Quantity=10, Price= 25.5 };
+            Item itemPants2 = new Item { ClothingType = ClothingType.Cloth, Sex = Sex.Female, Title="Волшебные штаны", Description="Как говорил Джейсон Стетхем: \"В штанах я король. Сейчас я в штанах\". Купите штаны.", Quantity=19, Price= 35.92 };
 
             itemJacket1.Purchases.Add(purchase);
             itemJacket1.Images.Add(imageJacket1);
             itemJacket1.Category = categoryJackets;
+            
+            itemJacket2.Purchases.Add(purchase);
+            itemJacket2.Images.Add(imageJacket2);
+            itemJacket2.Category = categoryJackets;
+
+            itemPants1.Purchases.Add(purchase);
+            itemPants1.Images.Add(imagePants1);
+            itemPants1.Category = categoryPants;
+
+            itemPants2.Purchases.Add(purchase);
+            itemPants2.Images.Add(imagePants2);
+            itemPants2.Category = categoryPants;
 
             context.Items.Add(itemJacket1);
+            context.Items.Add(itemJacket2);
+            context.Items.Add(itemPants1);
+            context.Items.Add(itemPants2);
             context.SaveChanges();
         }
     }

@@ -1,0 +1,64 @@
+﻿
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        @Html.ActionLink("Магазин одежды", "Index", "Home", new { @class="navbar-brand"})
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Мужчинам
+                    </a>
+                    <div class="dropdown-menu" style="padding-left: 15px; padding-right:15px;" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="row">
+                            <div class="col col-sm">
+                                <p><strong>Одежда</strong></p>
+                                <hr />
+                                    @foreach (var category in ViewBag.MenCloth)
+                                    {
+                                        <a class="dropdown-item"  href="/Home/selectedcategory?sex=male&type=cloth&category=@category.Name"> @category.Name</a>
+                                    }
+                            </div>
+                            <div class="col">
+                                <p><strong>Обувь</strong></p>
+                                <hr />
+                                    @foreach (var category in ViewBag.MenShoes)
+                                    {
+                                        <a class="dropdown-item" href="/Home/selectedcategory?sex=male&type=shoes&category=@category.Name"> @category.Name</a>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Женщинам
+                    </a>
+                    <div class="dropdown-menu" style="padding-left: 15px; padding-right:15px;" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="row">
+                            <div class="col col-sm">
+                                <p><strong>Одежда</strong></p>
+                                <hr />
+                                    @foreach (var category in ViewBag.WomenCloth)
+                                    {
+                                        <a class="dropdown-item"  href="/Home/selectedcategory?sex=female&type=cloth&category=@category.Name"> @category.Name</a>
+                                    }
+                            </div>
+                            <div class="col">
+                                <p><strong>Обувь</strong></p>
+                                <hr />
+                                    @foreach (var category in ViewBag.WomenShoes)
+                                    {
+                                        <a class="dropdown-item"  href="/Home/selectedcategory?sex=female&type=shoes&category=@category.Name"> @category.Name</a>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                @Html.Partial("_LoginPartial")
+
+            </ul>
+        </div>
+    </nav>  

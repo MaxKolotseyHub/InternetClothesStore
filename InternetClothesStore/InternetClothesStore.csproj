@@ -364,10 +364,10 @@
     <Content Include="Views\Home\NavbarPartial.cshtml" />
     <Content Include="Views\Home\SelectedCategory.cshtml" />
     <Content Include="Views\Home\ItemDescription.cshtml" />
-    <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\ShowCart.cshtml" />
     <Content Include="Views\HomePartial\Cart.cshtml" />
     <Content Include="Views\HomePartial\NavbarPartial.cshtml" />
+    <Content Include="Views\Home\PurchaseInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

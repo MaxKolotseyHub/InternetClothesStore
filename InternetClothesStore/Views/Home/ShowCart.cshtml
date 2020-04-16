@@ -3,41 +3,76 @@
 
 <h2>Корзина</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.ActionLink("Удалить", "DeleteFromCart", new { id=item.Id })
-        </td>
-    </tr>
+@{
+    if (Model.Count() == 0)
+    {
+        <div class="jumbotron">
+            <div class="lead text-center">Ваша корзина пуста.</div>
+        </div>
+        @section scripts{
+            <script>
+
+                $(document).ready(function refresh() {
+                    console.log("clicked");
+
+                    $.ajax({
+                        url: '/HomePartial/NavbarPartial',
+                        success: function (data) {
+                            console.log("updating");
+                            console.log(JSON.stringify(data));
+                            $("#navbar").html(data);
+                        }
+                    })
+                });
+
+            </script>
+        }
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "DeleteFromCart", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <form action="/Home/PurchaseInfo" method="get">
+            <input type="submit" class="btn btn-primary" value="Оформить заказ" />
+        </form>
+    }
+
 }
-
-</table>

@@ -69,16 +69,7 @@ namespace InternetClothesStore.Controllers
         {
             return PartialView();
         }
-        [HttpGet]
-        public ActionResult SelectCategory(string category)
-        {
-            List<Item> items = new List<Item>();
-            using (InternetStoreContext db = new InternetStoreContext())
-            {
-                items = db.Items.Include(x => x.Images).Include(x => x.Category).Where(x => x.Category.Name == category).ToList();
-            }
-            return PartialView(items);
-        }
+   
         [HttpGet]
         public ActionResult ItemDescription(int id)
         {
@@ -107,9 +98,35 @@ namespace InternetClothesStore.Controllers
             return RedirectToAction("ShowCart");
         }
         [HttpGet]
-        public ActionResult Registration()
+        public ActionResult PurchaseInfo()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult PurchaseInfo(Client client)
+        {
+            using (InternetStoreContext db = new InternetStoreContext())
+            {
+                db.Clients.Add(client);
+                Purchase purchase = new Purchase();
+                purchase.Client = client;
+                foreach (var item in CartList)
+                {
+                    //var it = db.Items.FirstOrDefault(x => x.Id == item.Id);
+                    //if (it != null)
+                    //    it.Quantity -= item.Quantity;
+
+                    purchase.Items.Add(item);
+                }
+                purchase.PurchaseDateTime = DateTime.Now;
+
+                db.Purchases.Add(purchase);
+
+                db.SaveChanges();
+
+                CartList.Clear();
+            }
+            return RedirectToAction("ShowCart");
         }
         [HttpPost]
         public ActionResult AddToCart(int Id, long quantity)
@@ -131,22 +148,8 @@ namespace InternetClothesStore.Controllers
             using (InternetStoreContext db = new InternetStoreContext())
             {
                 ViewBag.SexList = Enum.GetValues(typeof(Sex));
-
             }
             return View();
-        }
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        [Authorize(Roles ="admin")]
-        public string GetInfo()
-        {
-            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
-            var email = HttpContext.User.Identity.Name;
-            return "<html>" + email + "</html>";
         }
     }
 }

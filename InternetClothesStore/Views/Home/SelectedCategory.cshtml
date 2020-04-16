@@ -11,7 +11,7 @@
                 <img src="@item.Images.First().Path" height="250" />
                 <p><h3 class="lead text-center">@item.Title</h3></p>
                 <p class="text-center">Цена: @item.Price BYN</p>
-                @Html.ActionLink("Подробнее", "Index", "Home", new { @class = "text overlay" })
+                @Html.ActionLink("Подробнее", "ItemDescription", "Home",htmlAttributes: new { @class = "text overlay" }, routeValues: new { id = item.Id})
             </div>
         }
     </div>

@@ -174,9 +174,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CatalogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomePartialController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Db\AppDbInitializer.cs" />
     <Compile Include="Db\DbContextInitializer.cs" />
     <Compile Include="Db\InternetStoreContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -362,6 +363,11 @@
     <Content Include="Views\Catalog\Index.cshtml" />
     <Content Include="Views\Home\NavbarPartial.cshtml" />
     <Content Include="Views\Home\SelectedCategory.cshtml" />
+    <Content Include="Views\Home\ItemDescription.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\ShowCart.cshtml" />
+    <Content Include="Views\HomePartial\Cart.cshtml" />
+    <Content Include="Views\HomePartial\NavbarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -51,7 +51,7 @@ namespace InternetClothesStore.Controllers
             List<Item> items = new List<Item>();
             using (InternetStoreContext db = new InternetStoreContext())
             {
-                items = db.Items.Include(x => x.Images).Include(x => x.Category).Where(x => x.Category.Name == category & (x.Sex == _sex | x.Sex == Sex.Unisex) & x.ClothingType == _type).ToList();
+                items = db.Items.Include(x => x.Images).Include(x => x.Category).Where(x => x.Category.Name == category & (x.Sex == _sex | x.Sex == Sex.Unisex) & x.ClothingType == _type & x.Archive==false).ToList();
             }
             return View(items);
         }
@@ -112,10 +112,10 @@ namespace InternetClothesStore.Controllers
                 purchase.Client = client;
                 foreach (var item in CartList)
                 {
-                    //var it = db.Items.FirstOrDefault(x => x.Id == item.Id);
-                    //if (it != null)
-                    //    it.Quantity -= item.Quantity;
-
+                    var it = db.Items.FirstOrDefault(x => x.Id == item.Id);
+                    if (it != null)
+                        it.Quantity -= item.Quantity;
+                    item.Archive = true;
                     purchase.Items.Add(item);
                 }
                 purchase.PurchaseDateTime = DateTime.Now;
@@ -149,6 +149,12 @@ namespace InternetClothesStore.Controllers
             {
                 ViewBag.SexList = Enum.GetValues(typeof(Sex));
             }
+            return View();
+        }
+        [HttpGet]
+        [Authorize(Roles ="admin")]
+        public ActionResult AdminTools()
+        {
             return View();
         }
     }

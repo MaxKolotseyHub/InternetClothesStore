@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -14,12 +15,17 @@ namespace InternetClothesStore.Models
             Sizes = new List<Size>();
         }
         public int Id { get; set; }
+        [DisplayName("Название")]
         public string Title { get; set; }
+        [DisplayName("Цена")]
         public double Price { get; set; }
         public Sex Sex { get; set; }
         public ClothingType ClothingType { get; set; }
+        [DisplayName("Описание")]
         public string Description { get; set; }
+        [DisplayName("Доступно для заказа")]
         public long Quantity { get; set; }
+        public bool Archive { get; set; } = false;
         public virtual List<Image> Images { get; set; }
         public  int CategoryId { get; set; }
         public virtual Category Category { get; set; }

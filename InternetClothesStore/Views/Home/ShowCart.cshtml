@@ -1,7 +1,18 @@
 ﻿@model IEnumerable<InternetClothesStore.Models.Item>
 
 
-<h2>Корзина</h2>
+<div class="row">
+    <div class="col-1">
+        <h2 style="margin:15px">Корзина</h2style="margin:15px">
+
+    </div>
+    <div class="col">
+
+        <form action="/Home/PurchaseInfo" method="get" class="text-right" style="margin:15px">
+            <input type="submit" class="btn btn-primary" value="Оформить заказ" />
+        </form>
+    </div>
+</div>
 
 
 @{
@@ -10,24 +21,7 @@
         <div class="jumbotron">
             <div class="lead text-center">Ваша корзина пуста.</div>
         </div>
-        @section scripts{
-            <script>
 
-                $(document).ready(function refresh() {
-                    console.log("clicked");
-
-                    $.ajax({
-                        url: '/HomePartial/NavbarPartial',
-                        success: function (data) {
-                            console.log("updating");
-                            console.log(JSON.stringify(data));
-                            $("#navbar").html(data);
-                        }
-                    })
-                });
-
-            </script>
-        }
     }
     else
     {
@@ -70,9 +64,24 @@
             }
 
         </table>
-        <form action="/Home/PurchaseInfo" method="get">
-            <input type="submit" class="btn btn-primary" value="Оформить заказ" />
-        </form>
     }
 
 }
+@*@section scripts{
+    <script>
+
+        $(document).ready(function refresh() {
+            console.log("clicked");
+
+            $.ajax({
+                url: '/HomePartial/NavbarPartial',
+                success: function (data) {
+                    console.log("updating");
+                    console.log(JSON.stringify(data));
+                    $("#navbar").html(data);
+                }
+            })
+        });
+
+    </script>
+}*@

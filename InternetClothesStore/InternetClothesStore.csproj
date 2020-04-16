@@ -174,6 +174,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePartialController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -368,6 +369,10 @@
     <Content Include="Views\HomePartial\Cart.cshtml" />
     <Content Include="Views\HomePartial\NavbarPartial.cshtml" />
     <Content Include="Views\Home\PurchaseInfo.cshtml" />
+    <Content Include="Views\Admin\AdminTools.cshtml" />
+    <Content Include="Views\Admin\Create.cshtml" />
+    <Content Include="Views\Admin\PartialCategoryCreate.cshtml" />
+    <Content Include="Views\Admin\PartialImagesCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

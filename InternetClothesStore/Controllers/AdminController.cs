@@ -111,7 +111,6 @@ namespace InternetClothesStore.Controllers
         [HttpPost]
         public ActionResult Details(Item item, string sex, string type)
         {
-
             using (InternetStoreContext db = new InternetStoreContext())
             {
                 if (type == "одежда")

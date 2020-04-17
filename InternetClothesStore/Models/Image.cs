@@ -7,11 +7,8 @@ namespace InternetClothesStore.Models
 {
     public class Image
     {
-        public Image()
-        {
-            Items = new List<Item>();
-        }
-        public virtual List<Item> Items { get; set; }
+        public virtual Item Item { get; set; }
+        public virtual int ItemId { get; set; }
         public int Id { get; set; }
         public string Path { get; set; }
     }

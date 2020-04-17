@@ -13,7 +13,7 @@ namespace InternetClothesStore.Controllers
     {
         [HttpGet]
         [Authorize(Roles = "admin")]
-        public ActionResult AdminTools()
+        public ActionResult Index()
         {
             List<Item> items;
             using(InternetStoreContext db = new InternetStoreContext())
@@ -54,7 +54,70 @@ namespace InternetClothesStore.Controllers
                 db.Items.Add(item);
                 db.SaveChanges();
             }
-            return RedirectToAction("AdminTools");
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            using (InternetStoreContext db = new InternetStoreContext())
+            {
+                var item = db.Items.FirstOrDefault(x=>x.Id==id);
+                if (item != null)
+                {
+                    db.Items.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            Item item;
+            using (InternetStoreContext db = new InternetStoreContext())
+            {
+                item = db.Items.Include(x => x.Images).Include(x => x.Category).Include(x => x.Sizes).FirstOrDefault(x=>x.Id == id);
+            }
+            return View(item);
+        }
+        [HttpGet]
+        public ActionResult DeleteImage(int imageid)
+        {
+            int itemid = 0;
+            using(InternetStoreContext db = new InternetStoreContext())
+            {
+                var item = db.Images.FirstOrDefault(x => x.Id == imageid);
+                if(item!=null)
+                {
+                    itemid = item.ItemId;
+                    db.Images.Remove(item);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new {id = itemid});
+        }
+        [HttpPost]
+        public ActionResult AddImage(int itemid, string url)
+        {
+            using(InternetStoreContext db = new InternetStoreContext())
+            {
+                var item = db.Items.FirstOrDefault(x=>x.Id == itemid);
+                item.Images.Add(new Image() { Path = url});
+                db.SaveChanges();
+            }
+            return RedirectToAction("Details", new { id = itemid });
+        }
+        [HttpPost]
+        public ActionResult Details(Item item)
+        {
+            using (InternetStoreContext db = new InternetStoreContext())
+            {
+                db.Items.Attach(item);
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            return View(item);
         }
     }
 }

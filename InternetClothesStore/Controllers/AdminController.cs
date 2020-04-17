@@ -109,15 +109,26 @@ namespace InternetClothesStore.Controllers
             return RedirectToAction("Details", new { id = itemid });
         }
         [HttpPost]
-        public ActionResult Details(Item item)
+        public ActionResult Details(Item item, string sex, string type)
         {
+
             using (InternetStoreContext db = new InternetStoreContext())
             {
+                if (type == "одежда")
+                    item.ClothingType = ClothingType.Cloth;
+                else item.ClothingType = ClothingType.Shoes;
+
+                if (sex == "мужское")
+                    item.Sex = Sex.Male;
+                else if (sex == "женское")
+                    item.Sex = Sex.Female;
+                else item.Sex = Sex.Unisex;
+
                 db.Items.Attach(item);
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            return View(item);
+            return RedirectToAction("Index");
         }
     }
 }

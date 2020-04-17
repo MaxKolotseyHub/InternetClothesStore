@@ -62,26 +62,43 @@
                     </td>
                 </tr>
             }
+            <tr>
+                <td>
+                    <strong>
+                        К оплате:
+                    </strong>
+                </td>
+                <td>
+                    @{double sum = 0;}
+                    @foreach (var item in Model)
+                    {
+                        sum += (item.Price * item.Quantity);
+                    }
+                    <strong>
+                    @sum
+                    </strong>
+                </td>
+            </tr>
 
         </table>
     }
 
 }
 @*@section scripts{
-    <script>
+        <script>
 
-        $(document).ready(function refresh() {
-            console.log("clicked");
+            $(document).ready(function refresh() {
+                console.log("clicked");
 
-            $.ajax({
-                url: '/HomePartial/NavbarPartial',
-                success: function (data) {
-                    console.log("updating");
-                    console.log(JSON.stringify(data));
-                    $("#navbar").html(data);
-                }
-            })
-        });
+                $.ajax({
+                    url: '/HomePartial/NavbarPartial',
+                    success: function (data) {
+                        console.log("updating");
+                        console.log(JSON.stringify(data));
+                        $("#navbar").html(data);
+                    }
+                })
+            });
 
-    </script>
-}*@
+        </script>
+    }*@

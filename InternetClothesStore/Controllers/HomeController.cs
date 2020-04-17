@@ -14,11 +14,6 @@ namespace InternetClothesStore.Controllers
 {
     public class HomeController : Controller
     {
-        static List<Item> CartList;
-        static HomeController()
-        {
-            CartList = new List<Item>();
-        }
         public ActionResult NavbarPartial()
         {
             using (InternetStoreContext db = new InternetStoreContext())
@@ -87,14 +82,14 @@ namespace InternetClothesStore.Controllers
         [HttpGet]
         public ActionResult ShowCart()
         {
-            return View(CartList);
+            return View(MyCart.GetInstance().Cart);
         }
         [HttpGet]
         public ActionResult DeleteFromCart(int id)
         {
             Item item;
-            if ((item = CartList.FirstOrDefault(x => x.Id == id)) != null)
-                CartList.Remove(item);
+            if ((item = MyCart.GetInstance().Cart.FirstOrDefault(x => x.Id == id)) != null)
+                MyCart.GetInstance().Cart.Remove(item);
             return RedirectToAction("ShowCart");
         }
         [HttpGet]
@@ -110,7 +105,7 @@ namespace InternetClothesStore.Controllers
                 db.Clients.Add(client);
                 Purchase purchase = new Purchase();
                 purchase.Client = client;
-                foreach (var item in CartList)
+                foreach (var item in MyCart.GetInstance().Cart)
                 {
                     var it = db.Items.FirstOrDefault(x => x.Id == item.Id);
                     if (it != null)
@@ -124,7 +119,7 @@ namespace InternetClothesStore.Controllers
 
                 db.SaveChanges();
 
-                CartList.Clear();
+                MyCart.GetInstance().Cart.Clear();
             }
             return RedirectToAction("ShowCart");
         }
@@ -139,7 +134,7 @@ namespace InternetClothesStore.Controllers
             if (item != null)
                 item.Quantity = quantity;
 
-            CartList.Add(item);
+            MyCart.GetInstance().Cart.Add(item);
 
             return RedirectToAction("Index");
         }

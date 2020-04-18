@@ -22,6 +22,34 @@ namespace InternetClothesStore.Controllers
             }
             return View(items);
         }
+        [HttpPost]
+        public ActionResult DeleteSize(int sizeid, int id)
+        {
+            using(InternetStoreContext db = new InternetStoreContext())
+            {
+                var size = db.Sizes.FirstOrDefault(x => x.Id == sizeid);
+                if(size != null)
+                {
+                    db.Sizes.Remove(size);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new { id = id });
+        }
+        [HttpPost]
+        public ActionResult AddSize(string mysize, int count, int id)
+        {
+            using(InternetStoreContext db = new InternetStoreContext())
+            {
+                var item = db.Items.FirstOrDefault(x => x.Id == id);
+                if (item != null)
+                {
+                    item.Sizes.Add(new Size() { MySize = mysize, Count = count });
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Details", new { id = id });
+        }
         [HttpGet]
         [Authorize(Roles = "admin")]
         public ActionResult Create()

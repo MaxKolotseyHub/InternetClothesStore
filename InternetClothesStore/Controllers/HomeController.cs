@@ -46,7 +46,7 @@ namespace InternetClothesStore.Controllers
             List<Item> items = new List<Item>();
             using (InternetStoreContext db = new InternetStoreContext())
             {
-                items = db.Items.Include(x => x.Images).Include(x => x.Category).Where(x => x.Category.Name == category & (x.Sex == _sex | x.Sex == Sex.Unisex) & x.ClothingType == _type & x.Archive==false).ToList();
+                items = db.Items.Include(x => x.Images).Include(x => x.Category).Where(x => x.Category.Name == category & (x.Sex == _sex | x.Sex == Sex.Unisex) & x.ClothingType == _type & x.Archive == false).ToList();
             }
             return View(items);
         }
@@ -64,7 +64,7 @@ namespace InternetClothesStore.Controllers
         {
             return PartialView();
         }
-   
+
         [HttpGet]
         public ActionResult ItemDescription(int id)
         {
@@ -102,7 +102,7 @@ namespace InternetClothesStore.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("PurchaseInfo",client);
+                return View("PurchaseInfo", client);
             }
             using (InternetStoreContext db = new InternetStoreContext())
             {
@@ -113,7 +113,13 @@ namespace InternetClothesStore.Controllers
                 {
                     var it = db.Items.FirstOrDefault(x => x.Id == item.Id);
                     if (it != null)
-                        it.Quantity -= item.Quantity;
+                    {
+                        var _size = it.Sizes.FirstOrDefault(x => x.MySize == item.SizeName);
+                        if (_size != null)
+                        {
+                            _size.Count -= item.Quantity;
+                        }
+                    }
                     item.Archive = true;
                     purchase.Items.Add(item);
                 }
@@ -128,15 +134,19 @@ namespace InternetClothesStore.Controllers
             return RedirectToAction("ShowCart");
         }
         [HttpPost]
-        public ActionResult AddToCart(int Id, long quantity)
+        public ActionResult AddToCart(int Id, int quantity, string size)
         {
+            size = size.Replace("\r\n", "").Trim();
             Item item;
             using (InternetStoreContext db = new InternetStoreContext())
             {
                 item = db.Items.FirstOrDefault(x => x.Id == Id);
             }
             if (item != null)
+            {
                 item.Quantity = quantity;
+                item.SizeName = size;
+            }
 
             MyCart.GetInstance().Cart.Add(item);
 
@@ -151,7 +161,7 @@ namespace InternetClothesStore.Controllers
             return View();
         }
         [HttpGet]
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult AdminTools()
         {
             return View();

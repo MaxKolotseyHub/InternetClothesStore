@@ -36,9 +36,33 @@ namespace InternetClothesStore.Db
             Item itemPants2 = new Item { ClothingType = ClothingType.Cloth, Sex = Sex.Female, Title="Волшебные штаны", Description="Как говорил Джейсон Стетхем: \"В штанах я король. Сейчас я в штанах\". Купите штаны.", Quantity=19, Price= 35.92 };
             Item itemShoes1 = new Item { ClothingType = ClothingType.Shoes, Sex = Sex.Unisex, Title="Крутые кроссовки", Description="Усейн Болт в таких рекорды ставил. Нужно брать!", Quantity=10, Price= 74.99 };
 
+            List<Size> jacket1Sizes = new List<Size> {
+                new Size { MySize="S",Count=5},
+                new Size { MySize="M",Count=9},
+                new Size { MySize="L",Count=6},
+                new Size { MySize="XL",Count=2},
+            };
+
+            List<Size> jacket2Sizes = new List<Size> {
+                new Size { MySize="S",Count=5},
+                new Size { MySize="M",Count=6},
+                new Size { MySize="L",Count=10},
+                new Size { MySize="XL",Count=2},
+            };
+            List<Size> shoesSizes = new List<Size> {
+                new Size { MySize="38",Count=5},
+                new Size { MySize="39",Count=0},
+                new Size { MySize="40",Count=10},
+                new Size { MySize="41",Count=2},
+            };
+
             itemShoes1.Images.Add(imageShoes1_1);
             itemShoes1.Images.Add(imageShoes1_2);
             itemShoes1.Images.Add(imageShoes1_3);
+            itemShoes1.Sizes = shoesSizes;
+            itemJacket1.Sizes = jacket1Sizes;
+            itemPants1.Sizes = jacket1Sizes;
+            itemPants2.Sizes = jacket1Sizes;
             itemShoes1.Category = categorySportShoes;
 
             itemJacket1.Images.Add(imageJacket1);
@@ -47,6 +71,7 @@ namespace InternetClothesStore.Db
             itemJacket2.Images.Add(imageJacket2);
             itemJacket2.Images.Add(imageJacket2_1);
             itemJacket2.Category = categoryJackets;
+            itemJacket1.Sizes = jacket2Sizes;
 
             itemPants1.Images.Add(imagePants1);
             itemPants1.Category = categoryPants;

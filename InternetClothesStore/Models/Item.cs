@@ -24,7 +24,8 @@ namespace InternetClothesStore.Models
         [DisplayName("Описание")]
         public string Description { get; set; }
         [DisplayName("Количество")]
-        public long Quantity { get; set; }
+        public int Quantity { get; set; }
+        public string SizeName { get; set; }
         public bool Archive { get; set; } = false;
         public virtual List<Image> Images { get; set; }
         public  int CategoryId { get; set; }

@@ -91,11 +91,11 @@
             </div>
         }
     </div>
-    <div class="col jumbotron">
+    <div class="col">
         <h2 class="text-center lead">Изображения</h2>
         <div class="form-group">
-            <div id="images">
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-left:auto; margin-right:auto;">
+            <div id="images" class="jumbotron">
+                <div id="carouselExampleIndicators" class="carousel slide " data-ride="carousel" style="margin-left:auto; margin-right:auto;">
                     <ol class="carousel-indicators">
                         @{ int counter = 0;
                             string activeClass = "active";}
@@ -146,13 +146,59 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
                 <form action="/Admin/AddImage" method="post" class="justify-content-center row" style="margin:15px">
                     <input type="text" name="url" class="form-control" style="margin:5px" />
                     <input type="submit" value="Добавить" class="btn btn-primary" style="margin:5px" />
                     <input type="hidden" name="itemid" value="@Model.Id" />
                 </form>
             </div>
+            <div class="form-group jumbotron">
+                <div class="col-md-10">
+                    <p>Размеры</p>
+                    <table>
+                        <tr>
+                            <th>Размер</th>
+                            <th>Количество</th>
+                        </tr>
+                        @foreach (var size in Model.Sizes)
+                        {
+
+                            <tr>
+                                <td>@Html.EditorFor(x => size.MySize)</td>
+                                <td>@Html.EditorFor(x => size.Count)</td>
+                                <td>
+                                    <form action="/Admin/DeleteSize" method="post">
+                                        <input type="hidden" value="@size.Id" name="sizeid"/>
+                                        <input type="hidden" value="@Model.Id" name="id"/>
+                                        <input type="submit" value="Удалить" class="btn btn-outline-danger"/>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <th>Добавить размер</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form action="/Admin/AddSize" method="post">
+
+                                    <input type="hidden" name="id" value="@Model.Id" class="input-group" />
+                                    <label>Размер</label>
+                                    <input type="text" name="mysize" class="input-group" />
+                                    <label>Количество</label>
+                                    <input type="number" name="count" class="input-group" />
+                                    <input type="submit" value="Добавить" class="btn btn-primary" style="margin-top:5px" />
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 </div>

@@ -12,17 +12,6 @@ namespace InternetClothesStore.Models
         Unisex
     }
 
-    public enum MySize
-    {
-        XXS,
-        XS,
-        S,
-        M,
-        L,
-        XL,
-        XXL
-    }
-
     public enum ClothingType
     {
         Cloth,

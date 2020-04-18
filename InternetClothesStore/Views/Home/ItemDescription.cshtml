@@ -95,28 +95,62 @@
                         <dd>
                             @Html.DisplayFor(model => model.Quantity)
                         </dd>
-
+                        <dt>
+                            @Html.DisplayName("Размеры")
+                        </dt>
+                    </dl>
+                    <table>
 
                         @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
                         {
-                            <dt>
-                            <dd>@Html.HiddenFor(model => model.Id)</dd>
-                            <dd><input type="number" max="@Model.Quantity" name="quantity" min="0" value="0"/></dd>
-                            @{ if (Model.Quantity == 0)
-                                {
-                                    <dd><input type="submit" value="В корзину" class="btn btn-primary "disabled /></dd>
-                                }
-                                else
-                                {
-                                    <dd><input type="submit" value="В корзину" class="btn btn-primary" /></dd>
-                                }
-                            }
-                            </dt>
+                            <tr>
+                                <td>
+                                    <select class="custom-select" id="select-size">
+                                        @foreach (var size in Model.Sizes)
+                                        {
+                                            <option value="@size.Count">
+                                                @Html.DisplayFor(model => size.MySize)
+                                            </option>
+                                        }
+                                    </select>
+                                </td>
+                                <td>
+                                    @Html.Label("Доступно: ")
+                                    <label id="count-size" />
+                                </td>
+                            </tr>
+                            <tr><td><input type="hidden" id="input-id" name="id" value="@Model.Id"/></td></tr>
+                            <tr><td><input type="hidden" id="input-size" name="size"/></td></tr>
+                            <tr><td><input type="number" id="input-count" name="quantity" min="0" value="0" style="margin:5px"/></td></tr>
+                            <tr><td><input type="submit" value="В корзину" class="btn btn-primary" id="btn-add-to-cart" /></td></tr>
                         }
-
-                    </dl>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            getSizesCount();
+            $('#select-size').change(function () {
+                console.log('click');
+                getSizesCount();
+            })
+        });
+        function getSizesCount() {
+            let count = $("#select-size").val();
+            $('#input-size').val($("#select-size").find(':selected').text());
+            if (count > 0)
+                $('#btn-add-to-cart').prop('disabled', false);
+            else
+                $('#btn-add-to-cart').prop('disabled', true);
+            console.log(count);
+            $("#input-count").attr({
+                'max': count
+            });
+            $('#count-size').text(count);
+        }
+    </script>
+}

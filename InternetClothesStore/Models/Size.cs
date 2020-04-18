@@ -12,7 +12,8 @@ namespace InternetClothesStore.Models
             Items = new List<Item>();
         }
         public int Id { get; set; }
-        public MySize MySize { get; set; }
+        public string MySize { get; set; }
+        public int Count { get; set; }
         public virtual List<Item> Items { get; set; }
     }
 }

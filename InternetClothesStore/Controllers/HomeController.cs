@@ -100,6 +100,10 @@ namespace InternetClothesStore.Controllers
         [HttpPost]
         public ActionResult PurchaseInfo(Client client)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("PurchaseInfo",client);
+            }
             using (InternetStoreContext db = new InternetStoreContext())
             {
                 db.Clients.Add(client);

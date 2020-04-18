@@ -13,7 +13,7 @@ namespace InternetClothesStore.Db
         {
             Database.SetInitializer<InternetStoreContext>(new DbContextInitializer());
         }
-        public InternetStoreContext(string connectionString = "Default") : base(connectionString)
+        public InternetStoreContext(string connectionString = "DefaultConnection") : base(connectionString)
         {
 
         }

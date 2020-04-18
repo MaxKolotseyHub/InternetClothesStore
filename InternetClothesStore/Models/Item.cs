@@ -23,7 +23,7 @@ namespace InternetClothesStore.Models
         public ClothingType ClothingType { get; set; }
         [DisplayName("Описание")]
         public string Description { get; set; }
-        [DisplayName("Доступно для заказа")]
+        [DisplayName("Количество")]
         public long Quantity { get; set; }
         public bool Archive { get; set; } = false;
         public virtual List<Image> Images { get; set; }

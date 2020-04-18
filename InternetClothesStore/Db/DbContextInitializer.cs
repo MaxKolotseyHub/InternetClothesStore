@@ -30,19 +30,6 @@ namespace InternetClothesStore.Db
             Image imageShoes1_2 = new Image { Path = "https://images-na.ssl-images-amazon.com/images/I/61d1qavk3YL._AC_UY675_.jpg" };
             Image imageShoes1_3 = new Image { Path = "https://images-na.ssl-images-amazon.com/images/I/61Krm4ZsiIL._AC_UY625_.jpg" };
 
-            //context.Images.Add(imagePants1);
-            //context.Images.Add(imageJacket1);
-            //context.Images.Add(imageJacket2);
-            //context.Images.Add(imagePants2);
-            //context.Images.Add(imageShoes1_1);
-            //context.Images.Add(imageShoes1_2);
-            //context.Images.Add(imageShoes1_3);
-
-
-            Client client1 = new Client { FirstName = "Alex", LastName = "Kurpatov", Address = "Minsk" };
-
-            context.Clients.Add(client1);
-
             Item itemJacket1 = new Item {ClothingType = ClothingType.Cloth ,Sex = Sex.Unisex, Title="Желтая куртка", Description="Очень классная куртка, такая классная, что всем советуем.", Quantity=25, Price= 47.92 };
             Item itemJacket2 = new Item { ClothingType = ClothingType.Cloth, Sex = Sex.Female, Title="Хорошая куртка", Description="Куртка неплоха, можно поносить, рили", Quantity=19, Price= 35.92 };
             Item itemPants1 = new Item { ClothingType = ClothingType.Cloth, Sex =Sex.Female, Title="Штанишки", Description="Шутки шутками,а без штанов не проживешь. Покупай хорошие штаны в нашем магазине!", Quantity=10, Price= 25.5 };

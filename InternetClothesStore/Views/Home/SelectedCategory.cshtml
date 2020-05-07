@@ -4,7 +4,7 @@
 <body>
     <link href="~/Content/MyStyles.css" rel="stylesheet" />
 
-    <div class="catalog-container-flex">
+    <div class="catalog-container-flex" id="flexbox">
         @foreach (var item in Model)
         {
             <div class="card card-hover" style="margin:25px; height:auto; width: auto; padding:5px; min-width:250px">
@@ -17,3 +17,15 @@
     </div>
 </body>
 </html>
+
+@section scripts{
+    
+    <script>
+        $(document).ready(function () {
+            $('#flexbox').each(function (e) {
+                console.log($(this).text());
+            });
+        });
+    </script>
+
+    }

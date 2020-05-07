@@ -181,6 +181,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomePartialController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PurchasesController.cs" />
     <Compile Include="Db\AppDbInitializer.cs" />
     <Compile Include="Db\DbContextInitializer.cs" />
     <Compile Include="Db\InternetStoreContext.cs" />
@@ -377,6 +378,8 @@
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Purchases\Index.cshtml" />
+    <Content Include="Views\Purchases\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
